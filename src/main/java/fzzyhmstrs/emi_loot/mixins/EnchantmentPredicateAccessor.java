@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(EnchantmentPredicate.class)
 public interface EnchantmentPredicateAccessor {
 
-    @Accessor(value = "enchantment")
-    Enchantment getEnchantment();
+/*    @Accessor(value = "enchantment")
+    Enchantment getEnchantment();*/
 
 }

@@ -10,13 +10,13 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(FluidPredicate.class)
 public interface FluidPredicateAccessor {
 
-    @Accessor(value = "tag")
+/*    @Accessor(value = "tag")
     TagKey<Fluid> getTag();
 
     @Accessor(value = "fluid")
     Fluid getFluid();
 
     @Accessor(value = "state")
-    StatePredicate getState();
+    StatePredicate getState();*/
 
 }

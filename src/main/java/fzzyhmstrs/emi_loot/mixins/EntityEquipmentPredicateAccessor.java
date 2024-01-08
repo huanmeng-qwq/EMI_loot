@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(EntityEquipmentPredicate.class)
 public interface EntityEquipmentPredicateAccessor {
 
-    @Accessor(value = "head")
+/*    @Accessor(value = "head")
     ItemPredicate getHead();
 
     @Accessor(value = "chest")
@@ -24,5 +24,5 @@ public interface EntityEquipmentPredicateAccessor {
     ItemPredicate getMainhand();
 
     @Accessor(value = "offhand")
-    ItemPredicate getOffhand();
+    ItemPredicate getOffhand();*/
 }

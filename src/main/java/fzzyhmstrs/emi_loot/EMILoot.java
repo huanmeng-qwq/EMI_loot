@@ -42,13 +42,13 @@ public class EMILoot implements ModInitializer {
     public static boolean DEBUG = config.debugMode;
 
     //conditions & functions will be used in Lootify also, copying the identifier here so both mods can serialize the same conditions separately
-    public static LootConditionType WITHER_KILL = LootConditionTypes.register("lootify:wither_kill", new KilledByWitherLootCondition.Serializer());
-    public static LootConditionType SPAWNS_WITH = LootConditionTypes.register("lootify:spawns_with", new MobSpawnedWithLootCondition.Serializer());
-    public static LootConditionType CREEPER = LootConditionTypes.register("lootify:creeper", new BlownUpByCreeperLootCondition.Serializer());
-    public static LootFunctionType SET_ANY_DAMAGE = LootFunctionTypes.register("lootify:set_any_damage", new SetAnyDamageLootFunction.Serializer());
-    public static LootFunctionType OMINOUS_BANNER = LootFunctionTypes.register("lootify:ominous_banner", new OminousBannerLootFunction.Serializer());
+    public static LootConditionType WITHER_KILL = LootConditionTypes.register("lootify:wither_kill", KilledByWitherLootCondition.CODEC);
+    public static LootConditionType SPAWNS_WITH = LootConditionTypes.register("lootify:spawns_with", MobSpawnedWithLootCondition.CODEC);
+    public static LootConditionType CREEPER = LootConditionTypes.register("lootify:creeper", BlownUpByCreeperLootCondition.CODEC);
+    public static LootFunctionType SET_ANY_DAMAGE = LootFunctionTypes.register("lootify:set_any_damage", SetAnyDamageLootFunction.CODEC);
+    public static LootFunctionType OMINOUS_BANNER = LootFunctionTypes.register("lootify:ominous_banner", OminousBannerLootFunction.CODEC);
 
-    public static Enchantment RANDOM = new Enchantment(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.TRIDENT, EquipmentSlot.values()){
+    public static Enchantment RANDOM = new Enchantment(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.TRIDENT, EquipmentSlot.values()) {
         @Override
         public boolean isAvailableForEnchantedBookOffer() {
             return false;
@@ -62,31 +62,31 @@ public class EMILoot implements ModInitializer {
     @Override
     public void onInitialize() {
         parser.registerServer();
-        //Registry.register(Registries.ENCHANTMENT,new Identifier(MOD_ID,"random"),RANDOM);
+        Registry.register(Registries.ENCHANTMENT, new Identifier(MOD_ID, "random"), RANDOM);
     }
-    
+
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    private static EmiLootConfig readOrCreate(){
+    private static EmiLootConfig readOrCreate() {
         File dir = FabricLoader.getInstance().getConfigDir().toFile();
-        
+
         if (!dir.exists() && !dir.mkdirs()) {
             LOGGER.error("EMI Loot could not find or create config directory, using default configs");
             return new EmiLootConfig();
         }
         String f_old_name = "EmiLootConfig.json";
         String f_name = "EmiLootConfig_v1.json";
-        
-        File f_old = new File(dir,f_old_name);
-        
-        try{
-            if (f_old.exists()){
-                EmiLootConfigOld oldConfig = gson.fromJson(new InputStreamReader(new FileInputStream(f_old)),EmiLootConfigOld.class);
+
+        File f_old = new File(dir, f_old_name);
+
+        try {
+            if (f_old.exists()) {
+                EmiLootConfigOld oldConfig = gson.fromJson(new InputStreamReader(new FileInputStream(f_old)), EmiLootConfigOld.class);
                 EmiLootConfig newConfig = oldConfig.generateNewConfig();
-                File f = new File(dir,f_name);
-                if (f.exists()){
+                File f = new File(dir, f_name);
+                if (f.exists()) {
                     f_old.delete();
-                    return gson.fromJson(new InputStreamReader(new FileInputStream(f)),EmiLootConfig.class);
-                } else if (!f.createNewFile()){
+                    return gson.fromJson(new InputStreamReader(new FileInputStream(f)), EmiLootConfig.class);
+                } else if (!f.createNewFile()) {
                     LOGGER.error("Failed to create new config file, using old config with new defaults.");
                 } else {
                     f_old.delete();
@@ -98,7 +98,7 @@ public class EMILoot implements ModInitializer {
                 }
                 return newConfig;
             } else {
-                File f = new File(dir,f_name);
+                File f = new File(dir, f_name);
                 if (f.exists()) {
                     return gson.fromJson(new InputStreamReader(new FileInputStream(f)), EmiLootConfig.class);
                 } else if (!f.createNewFile()) {
@@ -113,22 +113,22 @@ public class EMILoot implements ModInitializer {
                     return emc;
                 }
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             LOGGER.error("Emi Loot failed to create or read it's config file!");
             LOGGER.error(Arrays.toString(e.getStackTrace()));
             return new EmiLootConfig();
         }
     }
-    
-    public static class EmiLootConfig{
+
+    public static class EmiLootConfig {
         public boolean debugMode = false;
 
         public boolean parseChestLoot = true;
-        
+
         public boolean parseBlockLoot = true;
-        
+
         public boolean parseMobLoot = true;
-    
+
         public boolean parseGameplayLoot = true;
 
         public boolean chestLootCompact = true;
@@ -136,10 +136,10 @@ public class EMILoot implements ModInitializer {
         public boolean chestLootAlwaysStackSame = false;
 
         public boolean mobLootIncludeDirectDrops = true;
-		public boolean parseArchaeologyLoot = true;
-	}
+        public boolean parseArchaeologyLoot = true;
+    }
 
-    public static class EmiLootConfigOld{
+    public static class EmiLootConfigOld {
         public boolean parseChestLoot = true;
 
         public boolean parseBlockLoot = true;
@@ -148,7 +148,7 @@ public class EMILoot implements ModInitializer {
 
         public boolean parseGameplayLoot = true;
 
-        public EmiLootConfig generateNewConfig(){
+        public EmiLootConfig generateNewConfig() {
             EmiLootConfig newConfig = new EmiLootConfig();
             newConfig.parseChestLoot = this.parseChestLoot;
             newConfig.parseBlockLoot = this.parseBlockLoot;

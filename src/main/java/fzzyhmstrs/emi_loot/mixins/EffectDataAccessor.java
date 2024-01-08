@@ -14,9 +14,9 @@ public interface EffectDataAccessor {
     @Accessor(value = "duration")
     NumberRange.IntRange getDuration();
 
-    @Accessor(value = "ambient")
+/*    @Accessor(value = "ambient")
     Boolean getAmbient();
 
     @Accessor(value = "visible")
-    Boolean getVisible();
+    Boolean getVisible();*/
 }

@@ -8,6 +8,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(TableBonusLootCondition.class)
 public interface TableBonusLootConditionAccessor {
 
-    @Accessor(value = "enchantment")
-    Enchantment getEnchantment();
+/*    @Accessor(value = "enchantment")
+    Enchantment getEnchantment();*/
 }

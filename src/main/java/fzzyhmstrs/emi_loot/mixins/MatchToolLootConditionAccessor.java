@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(MatchToolLootCondition.class)
 public interface MatchToolLootConditionAccessor {
 
-    @Accessor(value = "predicate")
-    ItemPredicate getPredicate();
+/*    @Accessor(value = "predicate")
+    ItemPredicate getPredicate();*/
 
 }

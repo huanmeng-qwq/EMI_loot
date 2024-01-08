@@ -3,13 +3,8 @@ accessWidener   v1  named
 # accessible class net/minecraft/village/TradeOffers$BuyForOneEmeraldFactory
 # state predicate stuff
 accessible class net/minecraft/predicate/StatePredicate$Condition
-accessible class net/minecraft/predicate/StatePredicate$ExactValueCondition
-accessible class net/minecraft/predicate/StatePredicate$RangedValueCondition
-
-accessible field net/minecraft/predicate/StatePredicate$Condition key Ljava/lang/String;
-accessible field net/minecraft/predicate/StatePredicate$ExactValueCondition value Ljava/lang/String;
-accessible field net/minecraft/predicate/StatePredicate$RangedValueCondition min Ljava/lang/String;
-accessible field net/minecraft/predicate/StatePredicate$RangedValueCondition max Ljava/lang/String;
+accessible class net/minecraft/predicate/StatePredicate$ExactValueMatcher
+accessible class net/minecraft/predicate/StatePredicate$RangedValueMatcher
 
 # player predicate stuff
 accessible class net/minecraft/predicate/entity/PlayerPredicate$AdvancementPredicate
@@ -28,5 +23,11 @@ accessible field net/minecraft/loot/function/SetAttributesLootFunction$Attribute
 
 
 # Loot Condition/function Types
-accessible method net/minecraft/loot/condition/LootConditionTypes register (Ljava/lang/String;Lnet/minecraft/util/JsonSerializer;)Lnet/minecraft/loot/condition/LootConditionType;
-accessible method net/minecraft/loot/function/LootFunctionTypes register (Ljava/lang/String;Lnet/minecraft/util/JsonSerializer;)Lnet/minecraft/loot/function/LootFunctionType;
+accessible method net/minecraft/loot/condition/LootConditionTypes register (Ljava/lang/String;Lcom/mojang/serialization/Codec;)Lnet/minecraft/loot/condition/LootConditionType;
+accessible method net/minecraft/loot/function/LootFunctionTypes register (Ljava/lang/String;Lcom/mojang/serialization/Codec;)Lnet/minecraft/loot/function/LootFunctionType;
+
+accessible class net/minecraft/predicate/entity/PlayerPredicate$StatMatcher
+accessible field net/minecraft/loot/LootTable pools Ljava/util/List;
+accessible field net/minecraft/loot/LootManager GSON Lcom/google/gson/Gson;
+accessible class net/minecraft/loot/function/SetStewEffectLootFunction$StewEffect
+accessible class net/minecraft/predicate/entity/LocationPredicate$PositionRange

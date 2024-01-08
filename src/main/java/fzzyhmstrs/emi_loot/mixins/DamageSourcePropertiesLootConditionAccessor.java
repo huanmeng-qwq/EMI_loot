@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(DamageSourcePropertiesLootCondition.class)
 public interface DamageSourcePropertiesLootConditionAccessor {
 
-    @Accessor(value = "predicate")
-    DamageSourcePredicate getPredicate();
+/*    @Accessor(value = "predicate")
+    DamageSourcePredicate getPredicate();*/
 
 }

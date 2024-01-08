@@ -1,7 +1,6 @@
 package fzzyhmstrs.emi_loot.parser;
 
 import fzzyhmstrs.emi_loot.EMILoot;
-import fzzyhmstrs.emi_loot.mixins.FluidPredicateAccessor;
 import fzzyhmstrs.emi_loot.util.LText;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.predicate.FluidPredicate;
@@ -12,28 +11,29 @@ import net.minecraft.text.Text;
 
 public class FluidPredicateParser {
 
-    public static Text parseFluidPredicate(FluidPredicate predicate){
-        return LText.translatable("emi_loot.fluid_predicate.base",parseFluidPredicateInternal(predicate).getString());
+    public static Text parseFluidPredicate(FluidPredicate predicate) {
+        return LText.translatable("emi_loot.fluid_predicate.base", parseFluidPredicateInternal(predicate).getString());
     }
 
-    private static Text parseFluidPredicateInternal(FluidPredicate predicate){
+    private static Text parseFluidPredicateInternal(FluidPredicate predicate) {
 
-        TagKey<Fluid> tag = ((FluidPredicateAccessor)predicate).getTag();
-        if (tag != null){
-            return LText.translatable("emi_loot.fluid_predicate.tag",tag.id().toString());
+        TagKey<Fluid> tag = predicate.tag().orElse(null);
+        if (tag != null) {
+            return LText.translatable("emi_loot.fluid_predicate.tag", tag.id().toString());
         }
 
-        Fluid fluid = ((FluidPredicateAccessor)predicate).getFluid();
-        if (fluid != null){
+        Fluid fluid = predicate.fluid().orElse(null) != null ? predicate.fluid().orElse(null).value() : null;
+        if (fluid != null) {
             return LText.translatable("emi_loot.fluid_predicate.fluid", Registries.FLUID.getId(fluid).toString());
         }
 
-        StatePredicate statePredicate = ((FluidPredicateAccessor)predicate).getState();
-        if (!statePredicate.equals(StatePredicate.ANY)){
+        StatePredicate statePredicate = predicate.state().orElse(null);
+        if (statePredicate != null) {
             return StatePredicateParser.parseStatePredicate(statePredicate);
         }
 
-        if (EMILoot.DEBUG) EMILoot.LOGGER.warn("Empty or unparsable fluid predicate in table: "  + LootTableParser.currentTable);
+        if (EMILoot.DEBUG)
+            EMILoot.LOGGER.warn("Empty or unparsable fluid predicate in table: " + LootTableParser.currentTable);
         return LText.translatable("emi_loot.predicate.invalid");
     }
 

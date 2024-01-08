@@ -7,10 +7,10 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(WeatherCheckLootCondition.class)
 public interface WeatherCheckLootConditionAccessor {
 
-    @Accessor(value = "raining")
+/*    @Accessor(value = "raining")
     Boolean getRaining();
 
     @Accessor(value = "thundering")
-    Boolean getThundering();
+    Boolean getThundering();*/
 
 }

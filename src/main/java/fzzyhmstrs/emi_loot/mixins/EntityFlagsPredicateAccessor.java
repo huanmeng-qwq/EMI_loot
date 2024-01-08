@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(EntityFlagsPredicate.class)
 public interface EntityFlagsPredicateAccessor {
 
-    @Accessor(value = "isOnFire")
+/*    @Accessor(value = "isOnFire")
     Boolean getIsOnFire();
 
     @Accessor(value = "isSneaking")
@@ -20,5 +20,5 @@ public interface EntityFlagsPredicateAccessor {
     Boolean getIsSwimming();
 
     @Accessor(value = "isBaby")
-    Boolean getIsBaby();
+    Boolean getIsBaby();*/
 }

@@ -6,6 +6,7 @@ import fzzyhmstrs.emi_loot.parser.LootTableParser;
 import fzzyhmstrs.emi_loot.util.TextKey;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.condition.LootCondition;
+import net.minecraft.loot.condition.MatchToolLootCondition;
 import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.text.Text;
 
@@ -16,7 +17,7 @@ public class MatchToolConditionParser implements ConditionParser{
 
     @Override
     public List<LootTableParser.LootConditionResult> parseCondition(LootCondition condition, ItemStack stack, boolean parentIsAlternative){
-        ItemPredicate predicate = ((MatchToolLootConditionAccessor)condition).getPredicate();
+        ItemPredicate predicate = ((MatchToolLootCondition)condition).predicate().orElse(null);
         Text predicateText = ItemPredicateParser.parseItemPredicate(predicate);
         return Collections.singletonList(new LootTableParser.LootConditionResult(TextKey.of("emi_loot.condition.match_tool", predicateText.getString())));
     }

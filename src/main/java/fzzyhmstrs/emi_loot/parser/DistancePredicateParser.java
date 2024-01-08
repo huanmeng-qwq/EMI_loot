@@ -1,37 +1,37 @@
 package fzzyhmstrs.emi_loot.parser;
 
 import fzzyhmstrs.emi_loot.EMILoot;
-import fzzyhmstrs.emi_loot.mixins.DistancePredicateAccessor;
 import fzzyhmstrs.emi_loot.util.LText;
 import net.minecraft.predicate.NumberRange;
 import net.minecraft.predicate.entity.DistancePredicate;
 import net.minecraft.text.Text;
 
-public class DistancePredicateParser{
+public class DistancePredicateParser {
 
-    public static Text parseDistancePredicate(DistancePredicate predicate){
-        NumberRange.FloatRange abs = ((DistancePredicateAccessor)predicate).getAbsolute();
-        if (!abs.equals(NumberRange.FloatRange.ANY)){
-            return LText.translatable("emi_loot.entity_predicate.distance_abs",abs.getMin(),abs.getMax());
+    public static Text parseDistancePredicate(DistancePredicate predicate) {
+        NumberRange.DoubleRange abs = predicate.absolute();
+        if (!abs.equals(NumberRange.DoubleRange.ANY)) {
+            return LText.translatable("emi_loot.entity_predicate.distance_abs", abs.min().orElse(-1d), abs.max().orElse(-1d));
         }
-        NumberRange.FloatRange hor = ((DistancePredicateAccessor)predicate).getHorizontal();
-        if (!hor.equals(NumberRange.FloatRange.ANY)){
-            return LText.translatable("emi_loot.entity_predicate.distance_hor",hor.getMin(),hor.getMax());
+        NumberRange.DoubleRange hor = predicate.horizontal();
+        if (!hor.equals(NumberRange.DoubleRange.ANY)) {
+            return LText.translatable("emi_loot.entity_predicate.distance_hor", hor.min().orElse(-1d), hor.max().orElse(-1d));
         }
-        NumberRange.FloatRange x = ((DistancePredicateAccessor)predicate).getX();
-        if (!x.equals(NumberRange.FloatRange.ANY)){
-            return LText.translatable("emi_loot.entity_predicate.distance_x",x.getMin(),x.getMax());
+        NumberRange.DoubleRange x = predicate.x();
+        if (!x.equals(NumberRange.DoubleRange.ANY)) {
+            return LText.translatable("emi_loot.entity_predicate.distance_x", x.min().orElse(-1d), x.max().orElse(-1d));
         }
-        NumberRange.FloatRange y = ((DistancePredicateAccessor)predicate).getY();
-        if (!y.equals(NumberRange.FloatRange.ANY)){
-            return LText.translatable("emi_loot.entity_predicate.distance_y",y.getMin(),y.getMax());
+        NumberRange.DoubleRange y = predicate.y();
+        if (!y.equals(NumberRange.DoubleRange.ANY)) {
+            return LText.translatable("emi_loot.entity_predicate.distance_y", y.min().orElse(-1d), y.max().orElse(-1d));
         }
-        NumberRange.FloatRange z = ((DistancePredicateAccessor)predicate).getZ();
-        if (!z.equals(NumberRange.FloatRange.ANY)){
-            return LText.translatable("emi_loot.entity_predicate.distance_z",z.getMin(),z.getMax());
+        NumberRange.DoubleRange z = predicate.z();
+        if (!z.equals(NumberRange.DoubleRange.ANY)) {
+            return LText.translatable("emi_loot.entity_predicate.distance_z", z.min().orElse(-1d), z.max().orElse(-1d));
         }
 
-        if (EMILoot.DEBUG) EMILoot.LOGGER.warn("Unparsable distance predicate in table: " + LootTableParser.currentTable);
+        if (EMILoot.DEBUG)
+            EMILoot.LOGGER.warn("Unparsable distance predicate in table: " + LootTableParser.currentTable);
         return LText.translatable("emi_loot.predicate.invalid");
     }
 

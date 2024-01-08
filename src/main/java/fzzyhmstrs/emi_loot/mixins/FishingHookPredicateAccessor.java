@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(FishingHookPredicate.class)
 public interface FishingHookPredicateAccessor {
 
-    @Accessor(value = "inOpenWater")
-    boolean getInOpenWater();
+/*    @Accessor(value = "inOpenWater")
+    boolean getInOpenWater();*/
 
 }

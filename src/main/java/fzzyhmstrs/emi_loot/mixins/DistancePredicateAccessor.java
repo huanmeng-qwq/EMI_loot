@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(DistancePredicate.class)
 public interface DistancePredicateAccessor {
 
-    @Accessor(value = "absolute")
+/*    @Accessor(value = "absolute")
     NumberRange.FloatRange getAbsolute();
 
     @Accessor(value = "horizontal")
@@ -21,5 +21,5 @@ public interface DistancePredicateAccessor {
     NumberRange.FloatRange getY();
 
     @Accessor(value = "z")
-    NumberRange.FloatRange getZ();
+    NumberRange.FloatRange getZ();*/
 }

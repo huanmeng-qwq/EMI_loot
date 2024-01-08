@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(LocationPredicate.class)
 public interface LocationPredicateAccessor {
 
-    @Accessor(value = "x")
+/*    @Accessor(value = "x")
     NumberRange.FloatRange getX();
 
     @Accessor(value = "y")
@@ -43,5 +43,5 @@ public interface LocationPredicateAccessor {
     BlockPredicate getBlock();
 
     @Accessor(value = "fluid")
-    FluidPredicate getFluid();
+    FluidPredicate getFluid();*/
 }

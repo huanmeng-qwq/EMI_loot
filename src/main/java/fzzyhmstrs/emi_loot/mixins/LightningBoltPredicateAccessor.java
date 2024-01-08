@@ -12,7 +12,7 @@ public interface LightningBoltPredicateAccessor {
     @Accessor(value = "blocksSetOnFire")
     NumberRange.IntRange getBlocksSetOnFire();
 
-    @Accessor(value = "entityStruck")
-    EntityPredicate getEntityStruck();
+/*    @Accessor(value = "entityStruck")
+    EntityPredicate getEntityStruck();*/
 
 }

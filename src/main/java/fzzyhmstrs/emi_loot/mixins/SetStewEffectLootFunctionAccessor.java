@@ -6,12 +6,13 @@ import net.minecraft.loot.provider.number.LootNumberProvider;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
+import java.util.List;
 import java.util.Map;
 
 @Mixin(SetStewEffectLootFunction.class)
 public interface SetStewEffectLootFunctionAccessor {
 
-    @Accessor(value = "effects")
-    Map<StatusEffect, LootNumberProvider> getEffects();
+    @Accessor(value = "stewEffects")
+    List<SetStewEffectLootFunction.StewEffect> getStewEffects();
 
 }

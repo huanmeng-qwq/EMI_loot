@@ -18,11 +18,11 @@ public interface PlayerPredicateAccessor {
     @Accessor(value = "experienceLevel")
     NumberRange.IntRange getExperienceLevel();
 
-    @Accessor(value = "gameMode")
+/*    @Accessor(value = "gameMode")
     GameMode getGameMode();
 
     @Accessor(value = "stats")
-    Map<Stat<?>, NumberRange.IntRange> getStats();
+    Map<Stat<?>, NumberRange.IntRange> getStats();*/
 
     @Accessor(value = "recipes")
     Object2BooleanMap<Identifier> getRecipes();
@@ -30,6 +30,6 @@ public interface PlayerPredicateAccessor {
     @Accessor(value = "advancements")
     Map<Identifier, PlayerPredicate.AdvancementPredicate> getAdvancements();
 
-    @Accessor(value = "lookingAt")
-    EntityPredicate getLookingAt();
+/*    @Accessor(value = "lookingAt")
+    EntityPredicate getLookingAt();*/
 }

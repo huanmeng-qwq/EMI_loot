@@ -8,7 +8,9 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(LocationCheckLootCondition.class)
 public interface LocationCheckLootConditionAccessor{
 
+/*
     @Accessor(value = "predicate")
     LocationPredicate getPredicate();
+*/
 
 }

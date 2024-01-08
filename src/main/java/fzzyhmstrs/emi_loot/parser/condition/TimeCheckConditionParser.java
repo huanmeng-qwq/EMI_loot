@@ -6,6 +6,7 @@ import fzzyhmstrs.emi_loot.parser.processor.NumberProcessors;
 import fzzyhmstrs.emi_loot.util.TextKey;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.condition.LootCondition;
+import net.minecraft.loot.condition.TimeCheckLootCondition;
 import net.minecraft.loot.operator.BoundedIntUnaryOperator;
 
 import java.util.Collections;
@@ -15,7 +16,7 @@ public class TimeCheckConditionParser implements ConditionParser{
 
     @Override
     public List<LootTableParser.LootConditionResult> parseCondition(LootCondition condition, ItemStack stack, boolean parentIsAlternative){
-        Long period = ((TimeCheckLootConditionAccessor)condition).getPeriod();
+        Long period = ((TimeCheckLootCondition)condition).period().orElse(null);
         BoundedIntUnaryOperator value = ((TimeCheckLootConditionAccessor)condition).getValue();
         String processedValue = NumberProcessors.processBoundedIntUnaryOperator(value).getString();
         if (period != null){

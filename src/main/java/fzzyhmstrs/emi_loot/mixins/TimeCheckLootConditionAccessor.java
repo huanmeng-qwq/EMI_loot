@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(TimeCheckLootCondition.class)
 public interface TimeCheckLootConditionAccessor {
 
-    @Accessor(value = "period")
-    Long getPeriod();
+/*    @Accessor(value = "period")
+    Long getPeriod();*/
 
     @Accessor(value = "value")
     BoundedIntUnaryOperator getValue();

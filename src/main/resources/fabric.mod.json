@@ -6,6 +6,7 @@
   "description":"Plugin for EMI that shows chest loot, block drops, mob drops, and gameplay loot like fishing.",
   "icon": "assets/emi_loot/icon.png",
   "authors": [
+    "huanmeng_qwq",
     "fzzyhmstrs",
     "lxly9 (art)"
   ],

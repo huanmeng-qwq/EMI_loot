@@ -12,13 +12,13 @@ import java.util.Objects;
 public class LightPredicateParser{
 
     public static Text parseLightPredicate(LightPredicate predicate){
-        NumberRange.IntRange range = ((LightPredicateAccessor) predicate).getRange();
+        NumberRange.IntRange range = ((LightPredicateAccessor)(Object) predicate).getRange();
         if (range.equals(NumberRange.IntRange.ANY)) {
             if (EMILoot.DEBUG) EMILoot.LOGGER.warn("Undefined light predicate in table: "  + LootTableParser.currentTable);
             return LText.translatable("emi_loot.predicate.invalid");
         }
-        Integer min = range.getMin();
-        Integer max = range.getMax();
+        Integer min = range.min().orElse(null);
+        Integer max = range.max().orElse(null);
         if (Objects.equals(min, max) && min != null) {
             return LText.translatable("emi_loot.location_predicate.light", min);
         } else {

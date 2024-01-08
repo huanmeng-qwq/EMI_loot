@@ -12,7 +12,7 @@ public interface EntityPropertiesLootConditionAccessor{
     @Accessor(value = "entity")
     LootContext.EntityTarget getEntity();
     
-    @Accessor(value = "predicate")
-    EntityPredicate getPredicate();
+/*    @Accessor(value = "predicate")
+    EntityPredicate getPredicate();*/
 
 }

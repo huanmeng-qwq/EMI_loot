@@ -1,7 +1,7 @@
 package fzzyhmstrs.emi_loot.parser;
 
 import fzzyhmstrs.emi_loot.EMILoot;
-import fzzyhmstrs.emi_loot.mixins.ItemPredicateAccessor;
+import fzzyhmstrs.emi_loot.imixin.IItemPredicate;
 import fzzyhmstrs.emi_loot.parser.processor.ListProcessors;
 import fzzyhmstrs.emi_loot.util.LText;
 import net.minecraft.item.Item;
@@ -12,52 +12,51 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 public class ItemPredicateParser {
 
-    public static Text parseItemPredicate(ItemPredicate predicate){
-        TagKey<Item> tag = ((ItemPredicateAccessor)predicate).getTag();
-        if (tag != null){
-            return LText.translatable("emi_loot.item_predicate.tag",tag.id());
+    public static Text parseItemPredicate(ItemPredicate predicate) {
+        TagKey<Item> tag = ((IItemPredicate) (Object) predicate).eMI_loot$getTag();
+        if (tag != null) {
+            return LText.translatable("emi_loot.item_predicate.tag", tag.id());
         }
-        
-        Set<Item> items = ((ItemPredicateAccessor)predicate).getItems();
-        if (items != null && !items.isEmpty()){
-            List<MutableText> list = items.stream().map((item) -> (MutableText)item.getName()).toList();
+
+        Set<Item> items = ((IItemPredicate) (Object) predicate).eMI_loot$getItems();
+        if (items != null && !items.isEmpty()) {
+            List<MutableText> list = items.stream().map((item) -> (MutableText) item.getName()).toList();
             return LText.translatable("emi_loot.item_predicate.items", ListProcessors.buildOrList(list));
         }
-        
-        NumberRange.IntRange count = ((ItemPredicateAccessor)predicate).getCount();
-        if (count != NumberRange.IntRange.ANY){
-            Integer max = count.getMax();
-            Integer min = count.getMin();
+
+        NumberRange.IntRange count = ((IItemPredicate) (Object) predicate).eMI_loot$getCount();
+        if (count != NumberRange.IntRange.ANY) {
+            Integer max = count.max().orElse(null);
+            Integer min = count.min().orElse(null);
             int finalMax = max != null ? max : 0;
             int finalMin = min != null ? min : 0;
             return LText.translatable("emi_loot.item_predicate.count", Integer.toString(finalMin), Integer.toString(finalMax));
         }
-        
-        NumberRange.IntRange durability = ((ItemPredicateAccessor)predicate).getDurability();
-        if (durability != NumberRange.IntRange.ANY){
-            Integer max = durability.getMax();
-            Integer min = durability.getMin();
+
+        NumberRange.IntRange durability = ((IItemPredicate) (Object) predicate).eMI_loot$getDurability();
+        if (durability != NumberRange.IntRange.ANY) {
+            Integer max = durability.max().orElse(null);
+            Integer min = durability.min().orElse(null);
             int finalMax = max != null ? max : 0;
             int finalMin = min != null ? min : 0;
             return LText.translatable("emi_loot.item_predicate.durability", Integer.toString(finalMin), Integer.toString(finalMax));
         }
-        
-        EnchantmentPredicate[] enchants = ((ItemPredicateAccessor)predicate).getEnchantments();
-        EnchantmentPredicate[] storedEnchants = ((ItemPredicateAccessor)predicate).getStoredEnchantments();
-        if (enchants.length + storedEnchants.length > 0){
+
+        List<EnchantmentPredicate> enchants = ((IItemPredicate) (Object) predicate).eMI_loot$getEnchantments();
+        List<EnchantmentPredicate> storedEnchants = ((IItemPredicate) (Object) predicate).eMI_loot$getStoredEnchantments();
+        if (enchants.size() + storedEnchants.size() > 0) {
             List<EnchantmentPredicate> list = new LinkedList<>();
-            list.addAll(Arrays.stream(enchants).toList());
-            list.addAll(Arrays.stream(storedEnchants).toList());
+            list.addAll(enchants);
+            list.addAll(storedEnchants);
             return EnchantmentPredicateParser.parseEnchantmentPredicates(list);
         }
-        if (EMILoot.DEBUG) EMILoot.LOGGER.warn("Empty item predicate in table: "  + LootTableParser.currentTable);
+        if (EMILoot.DEBUG) EMILoot.LOGGER.warn("Empty item predicate in table: " + LootTableParser.currentTable);
         return LText.translatable("emi_loot.predicate.invalid");
     }
 

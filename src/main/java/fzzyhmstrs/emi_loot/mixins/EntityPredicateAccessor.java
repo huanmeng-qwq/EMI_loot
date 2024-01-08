@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(EntityPredicate.class)
 public interface EntityPredicateAccessor {
 
-    @Accessor(value = "type")
+/*    @Accessor(value = "type")
     EntityTypePredicate getType();
 
     @Accessor(value = "distance")
@@ -45,5 +45,5 @@ public interface EntityPredicateAccessor {
     EntityPredicate getTargetedEntity();
 
     @Accessor(value = "team")
-    String getTeam();
+    String getTeam();*/
 }

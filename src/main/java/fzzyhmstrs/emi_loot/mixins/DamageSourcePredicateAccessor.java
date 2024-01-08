@@ -7,9 +7,9 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(DamageSourcePredicate.class)
 public interface DamageSourcePredicateAccessor {
-    @Accessor(value = "directEntity")
+/*    @Accessor(value = "directEntity")
     EntityPredicate getDirectEntity();
     @Accessor(value = "sourceEntity")
-    EntityPredicate getSourceEntity();
+    EntityPredicate getSourceEntity();*/
 
 }
